@@ -22,21 +22,9 @@ async function updateTeam(req, res) {
   const teamData = req.body;
 
   Equipo.findByIdAndUpdate({ _id: id }, teamData).then(() => {
-    return res.status(200).send({ msg: 'Actualizacion de usuario exitosa' });
+    return res.status(200).send({ msg: 'Actualizacion de Equipo exitosa' });
   }).catch(() => {
-    return res.status(500).send({ msg: 'Hubo un error al actualizar el usuario' });
-  });
-}
-
-async function deleteTeam(req, res) {
-  const { id } = req.params;
-  Equipo.findByIdAndUpdate(id, { status: false }).then((team) => {
-    if (!team) {
-      return res.status(403).send({ msg: 'El Equipo no ha sido encontrado' });
-    }
-    return res.status(200).send({ msg: 'Equipo eliminado correctamente' });
-  }).catch(() => {
-    return res.status(500).send({ msg: 'Hubo un error al eliminar el equipo' });
+    return res.status(500).send({ msg: 'Hubo un error al actualizar el Equipo' });
   });
 }
 
@@ -54,16 +42,14 @@ async function deleteTeam(req, res) {
 
 async function getAllTeam(req, res) {
   const { active } = req.query;
-  console.log(active);
   let response = [];
   if (active === undefined) {
-    response = await Equipo.find({ status: true });
+    response = await Equipo.find();
   } else {
     response = await Equipo.find({ status: active });
   }
   return res.status(200).send(response);
 }
-
 
 module.exports = {
   createEquipo,

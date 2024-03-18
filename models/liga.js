@@ -7,14 +7,17 @@ const ligaModel = mongoose.Schema({
     required: [true, 'El nombre es obligatorio'],
     unique: true,
   },
-  teams: [{
-    team: { type: mongoose.Schema.Types.ObjectId, ref: 'Equipo' },
-    wins: { type: Number, default: 0 },
-    winsShootOut: { type: Number, default: 0 },
-    draws: { type: Number, default: 0 },
-    losses: { type: Number, default: 0 },
-    lossesShootOut: { type: Number, default: 0 }
-  }],
+  teams: {
+    type: [{
+      team: { type: mongoose.Schema.Types.ObjectId, ref: 'Equipo' },
+      wins: { type: Number, default: 0 },
+      winsShootOut: { type: Number, default: 0 },
+      draws: { type: Number, default: 0 },
+      losses: { type: Number, default: 0 },
+      lossesShootOut: { type: Number, default: 0 }
+    }],
+    default: [],
+  },
   status: {
     type: Boolean,
     default: true,

@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const { dbConnection } = require('../databases/configs');
-const { EquiposRoutes } = require('../routes');
+const { EquiposRoutes, LigaRoutes } = require('../routes');
 const { PORT, API_VERSION, IP_SERVER } = require('../constants/configs');
 
 class Server {
@@ -44,7 +44,7 @@ class Server {
     //configuracion routing
     // this.app.use(`/api/${this.API_VERSION}`, UsuariosRoutes);
     this.app.use(`/api/${this.API_VERSION}`, EquiposRoutes);
-
+    this.app.use(`/api/${this.API_VERSION}`, LigaRoutes);
   }
 
   listen() {
